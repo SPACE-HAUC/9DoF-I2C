@@ -47,8 +47,7 @@ int main (int argc, char **argv) {
     }
     while(1) {
     read_bytes (file, XM_ADDRESS, OUT_TEMP_L_XM, &data[0], 2);
-    temp=(data[0]-32)/1.8;
-    printf("Temperature = %d\n", temp);
+    printf("Temperature = %d\n", data[0]);
     usleep(250000);
     }
     return(0);
