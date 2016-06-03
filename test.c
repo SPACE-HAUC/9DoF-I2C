@@ -132,7 +132,7 @@ void dump_config_registers (int file)
  * The direction of rotation is clockwise when looking along the axis
  * from the origin (aka right hand rule). Roll and pitch are zero when
  * Edison is level, yaw is zero when y-axis points to north.
- * 
+ *
  */
 void calculate_simple_angles (FTriplet mag, FTriplet acc, float declination, FTriplet *angles)
 {
@@ -150,8 +150,8 @@ void calculate_simple_angles (FTriplet mag, FTriplet acc, float declination, FTr
     angles->z += 360;
 }
 
-/* This function originally from 
- * https://github.com/sparkfun/LSM9DS0_Breakout/blob/master/Libraries/Arduino/SFE_LSM9DS0/examples/LSM9DS0_AHRS/LSM9DS0_AHRS.ino 
+/* This function originally from
+ * https://github.com/sparkfun/LSM9DS0_Breakout/blob/master/Libraries/Arduino/SFE_LSM9DS0/examples/LSM9DS0_AHRS/LSM9DS0_AHRS.ino
  * which in turn is an implementation of http://www.x-io.co.uk/open-source-imu-and-ahrs-algorithms/ */
 void madgwick_quaternion(FTriplet acc, FTriplet mag, FTriplet gyro, float deltat, Quaternion *quat)
 {
@@ -264,7 +264,7 @@ void calculate_tait_bryan_angles (Quaternion quat, float declination, FTriplet *
     pitch = -asin(2.0f * (q2 * q4 - q1 * q3));
     roll  = atan2(2.0f * (q1 * q2 + q3 * q4), -(q1 * q1 - q2 * q2 - q3 * q3 + q4 * q4));
 
-    angles->x = yaw * 180.0f / M_PI - declination; 
+    angles->x = yaw * 180.0f / M_PI - declination;
     angles->y = pitch * 180.0f / M_PI;
     angles->z = roll * 180.0f / M_PI;
 }
@@ -391,10 +391,14 @@ int main (int argc, char **argv)
 
     usleep (500000);
 
+    read_bytes (file, XM_ADDRESS, OUT_TEMP_L_XM, &data[0], 2);
+    temp = (((data[1] & 0x0f) << 8) | data[0]);
+    printf ("Temperature: %d\n", temp);
+
     read_gyro (file, g_bias, GYRO_SCALE_245DPS, &gyro);
     read_mag (file, m_bias, m_scale, MAG_SCALE_2GS, &mag);
     read_acc (file, a_bias, ACCEL_SCALE_2G, &acc);
-
+    printf ("mag: %4.0f %4.0f %4.0f | ", mag.x*1000, mag.y*1000, mag.z*1000);
     if (option_mode == OPTION_MODE_SENSOR) {
       printf ("gyro: %4.0f %4.0f %4.0f | ", gyro.x, gyro.y, gyro.z);
       printf ("mag: %4.0f %4.0f %4.0f | ", mag.x*1000, mag.y*1000, mag.z*1000);
