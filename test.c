@@ -361,11 +361,11 @@ int main (int argc, char **argv)
   if (!read_bias_files (&a_bias, &g_bias, &m_bias, &m_scale))
     return 1;
 
-  file = init_device (I2C_DEV_NAME);
+  file = init_device (I2C_DEV_NAME); // we understand this now! (kinda...)
   if (file == 0)
-    return 1;
+    return 1; // terminate with error code 1
 
-  if (option_dump) {
+  if (option_dump) { // don't know, don't care
     dump_config_registers(file);
     printf ("\n");
   }

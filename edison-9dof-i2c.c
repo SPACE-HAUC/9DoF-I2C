@@ -32,12 +32,12 @@ int init_device (const char* device_name)
 {
   int file;
   uint8_t g_id, xm_id;
-
+  // open i2c bus (most likely 1)
   if ((file = open(device_name, O_RDWR)) < 0) {
     fprintf(stderr, "Failed to open the i2c bus '%s'\n", device_name);
     return 0;
   }
-
+  // make sure that the devide is the 9DoF board by checking id pins
   read_byte (file, G_ADDRESS, WHO_AM_I_G, &g_id);
   read_byte (file, XM_ADDRESS, WHO_AM_I_XM, &xm_id);
   if (g_id != 0xD4 || xm_id != 0x49) {
@@ -46,7 +46,7 @@ int init_device (const char* device_name)
     close (file);
     return 0;
   }
-
+ // return 1 asssuming stuff didnt break
   return file;
 }
 
