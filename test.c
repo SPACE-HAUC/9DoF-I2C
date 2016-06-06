@@ -376,6 +376,7 @@ int main (int argc, char **argv)
 
   // temperature is a 12-bit value: cut out 4 highest bits
   read_bytes (file, XM_ADDRESS, OUT_TEMP_L_XM, &data[0], 2);
+  printf("data[1] = %d. data[2] = %d", data[1], data[2]);
   temp = (((data[1] & 0x0f) << 8) | data[0]);
   printf ("Temperature: %d\n", temp);
   printf ("Temperature: %d\n", temp);
