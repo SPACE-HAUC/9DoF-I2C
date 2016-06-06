@@ -391,11 +391,10 @@ int main (int argc, char **argv)
     FTriplet gyro, mag, acc, angles1;
 
     usleep (500000);
-    printf("hihihi\n");
     read_bytes (file, XM_ADDRESS, OUT_TEMP_L_XM, &data[0], 2);
     temp = (((data[1] & 0x0f) << 8) | data[0]);
-    printf ("Temperature: %d\n", temp);
-
+    printf ("Temperature: %d, %d\n", temp, data[0]);
+    /*
     read_gyro (file, g_bias, GYRO_SCALE_245DPS, &gyro);
     read_mag (file, m_bias, m_scale, MAG_SCALE_2GS, &mag);
     read_acc (file, a_bias, ACCEL_SCALE_2G, &acc);
@@ -409,6 +408,7 @@ int main (int argc, char **argv)
       printf ("pitch: %4.0f, roll: %4.0f, yaw: %4.0f\n",
               angles1.x, angles1.y, angles1.z);
     }
+    */
   }
   return 0;
 }
