@@ -391,7 +391,7 @@ int main (int argc, char **argv)
     FTriplet gyro, mag, acc, angles1;
 
     usleep (500000);
-
+    printf("hihihi\n");
     read_bytes (file, XM_ADDRESS, OUT_TEMP_L_XM, &data[0], 2);
     temp = (((data[1] & 0x0f) << 8) | data[0]);
     printf ("Temperature: %d\n", temp);
