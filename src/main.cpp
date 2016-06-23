@@ -28,9 +28,8 @@ int main(int argc, char* argv[]) {
   cout << "Initialized Temperature Sensor" << endl;
   cout << "Reading Temperature data..." << endl;
   for (int i = 0; i < 5; i++) {
-    cout << "Temperature = " << (int) tempSensor.readTemp() << endl;
+    cout << "Temperature = " << (int) tmp102.readTemp() << endl;
     usleep(500000);
   }
-  return true;
   return 0;
 }
