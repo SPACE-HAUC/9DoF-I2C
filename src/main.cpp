@@ -1,6 +1,14 @@
 #include <iostream>
 #include "spacehauc-i2c-dev.hpp"
-
+#include "spacehauc-i2c-dev.hpp"
+#include <string>
+#include <vector>
+#include <sys/ioctl.h>
+#include <linux/i2c.h>
+#include <linux/i2c-dev.h>
+#include <fcntl.h>
+#include <iostream>
+#include <unistd.h>
 int main(int argc, char* argv[]) {
   TemperatureSensor tmp102(1, 0x48, 0x00, 0x00, 0x00);
   if (tmp102.initDevice() == false) {
